@@ -15,20 +15,17 @@ interface ChatBoxProps {
 }
 
 const ChatBox: React.FC<ChatBoxProps> = ({ messages, onStart, onStop, startClicked, className }) => {
-  const [showMessage, setShowMessage] = useState(false);
 
   const handleButtonClick = () => {
     if (!startClicked) {
       onStart(); // Call the onStart function passed from App component
-      setShowMessage(true); // Optionally show additional message or handle other actions
     } else {
       onStop(); // Call the onStop function passed from App component
-      setShowMessage(false); // Optionally hide additional message or handle other actions
     }
   };
   
   return (
-    <div className={`ChatBox bg-white rounded-lg shadow-lg p-3 flex h-screen w-full flex-col ${className}`}>
+    <div className={`ChatBox bg-blue-50 rounded-lg shadow-lg p-3 flex h-full w-full flex-col ${className}`}>
       <div className="flex-1 overflow-y-auto mb-4">
         {messages.map((message) => (
           <Message key={message.id} text={message.text} />
