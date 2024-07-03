@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChatBox from './components/ChatBox';
-import { RxCross1 } from "react-icons/rx";
+
 
 // Define MessageType
 interface MessageType {
