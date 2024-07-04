@@ -27,8 +27,12 @@ const App: React.FC = () => {
     if (!startClicked) {
       // Logic to send initial message
       setInitialMessage("Hello! I am your bot.");
-      setMessages(initialInsights);
+      setMessages(initialInsights.slice(0,5));
       setStartClicked(true); // Set start clicked to true
+
+      setTimeout(() => {
+        setInitialMessage("");
+      }, 5000);
     }
   };
 
@@ -40,13 +44,20 @@ const App: React.FC = () => {
   };
 
   const handleDeleteMessage = (id: number) => {
-    const updatedMessages = messages.filter(message => message.id !== id);
-    setMessages(updatedMessages);
+    setMessages(messages.filter(message => message.id !== id));
   };
 
   const handleInitialMessageDelete = () => {
     setInitialMessage(""); // Clear initial message
   };
+
+  const addMessage = (newMessage: MessageType) => {
+    setMessages(prevMessages => {
+      const updatedMessages = [...prevMessages, newMessage];
+      return updatedMessages.length > 5 ? updatedMessages.slice(-5) : updatedMessages;
+    });
+  };
+
 
   return (
     <div className="App h-screen bg-black flex flex-col justify-center items-center">
