@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ChatBox from './components/ChatBox';
+import VideoCall from './components/VideoCall';
+import { ConnectingComponent } from './components/ConnectingComponent';
 
 
 // Define MessageType
@@ -51,7 +53,8 @@ const App: React.FC = () => {
       <div className="grid grid-cols-4 w-full h-full">
         <div className="col-span-3 bg-blue-100 flex justify-center items-center">
           <div className="w-full h-full flex items-center justify-center"> //can insert code in this div for video camera 
-            Video Cam 
+            <VideoCall />
+            <ConnectingComponent />
           </div>
         </div>
         <div className="col-span-1 bg-white p-2 flex flex-col items-center shadow-lg h-full">
