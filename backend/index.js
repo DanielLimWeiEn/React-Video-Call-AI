@@ -1,29 +1,33 @@
 const express = require("express");
 const cors = require("cors");
-
-const generateStreamIOToken = require("./controllers/token-generator");
+const socketio = require("socket.io");
+const http = require('http');
 
 const app = express();
-app.use(
-    cors({
-        origin: [
-            'http://localhost:5173',
-            'http://localhost:5174'
-        ]
-    })
-);
-app.options('*', cors());
+const server = http.createServer(app);
+const io = socketio(server, {
+    cors: {
+        origin: "*"
+    }
+});
 
-const PORT = 8080;
+app.use(cors());
+io.on('connection', (socket) => {
+    console.log("New client connected");
 
-app.get("/stream-io-token", (req, res) => {
-    res.status(200).json({
-        message: "this stream io token generating service is working"
+    const sendMessages = setInterval(() => {
+        const content = {
+            timestamp: Date.now(),
+            message: "Hello from the server!"
+        }
+        socket.emit('message', content);
+    }, 1000);
+
+    socket.on('disconnect', () => {
+        clearInterval(sendMessages);
+        console.log("Client disconnected");
     });
 });
 
-app.get("/stream-io-token/:roomId", generateStreamIOToken);
-
-app.listen(PORT, () => {
-    console.log(`Video service listening on port ${PORT}`);
-});
+const PORT = 8765;
+server.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`));

@@ -19,25 +19,7 @@ const client = new StreamVideoClient({ apiKey, user, token });
 const call = client.call('default', callId);
 await call.join({ create: true });
 
-export default function VideoCall (props: { token2: string  }) {
-  // const [token2, setToken2] = useState(null);
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/stream-io-token/1", {
-  //     params: {
-  //       userId: "jonny"
-  //     }
-  //   }).then((res) => {
-  //     setToken2(res.data.streamIOToken);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   })
-
-  //   console.log(token2);
-  // });
-
-  console.log(props.token2);
-
+export default function VideoCall () {
   return (
     <StreamVideo client={client}>
       <StreamCall call={call}>
