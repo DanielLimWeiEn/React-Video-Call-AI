@@ -12,13 +12,6 @@ interface MessageType {
 }
 
 const App: React.FC = () => {
-  const initialInsights = [
-    { id: 1, title: "Insight 1", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." },
-    { id: 2, title: "Insight 2", text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English." },
-    { id: 3, title: "Insight 3", text: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable." },
-    // Add more static insights as needed
-  ];
-
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [startClicked, setStartClicked] = useState(false);
   const [initialMessage, setInitialMessage] = useState<string>("");
@@ -27,7 +20,6 @@ const App: React.FC = () => {
     if (!startClicked) {
       // Logic to send initial message
       setInitialMessage("Hello! I am your bot.");
-      setMessages(initialInsights.slice(0,5));
       setStartClicked(true); // Set start clicked to true
 
       setTimeout(() => {
@@ -63,7 +55,7 @@ const App: React.FC = () => {
     <div className="App h-screen bg-black flex flex-col justify-center items-center">
       <div className="grid grid-cols-4 w-full h-full">
         <div className="col-span-3 bg-blue-100 flex justify-center items-center">
-          <div className="w-full h-full flex items-center justify-center"> //can insert code in this div for video camera 
+          <div className="w-full h-full flex items-center justify-center">
             <VideoCall />
             <ConnectingComponent />
           </div>
